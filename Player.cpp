@@ -45,7 +45,7 @@ void Player::playerDirectionVector()
 	if (playerMouseVectX != 0 && playerMouseVectY != 0)
 	{
 		xDirectionVector = (playerMouseVectX / std::sqrt(std::pow(playerMouseVectX, 2) + std::pow(playerMouseVectY, 2)))*100 + xPos;
-		yDirectionVector = (playerMouseVectY / std::sqrt(std::pow(playerMouseVectX, 2) + std::pow(playerMouseVectY, 2)))*100 + yPos;
+		yDirectionVector = (playerMouseVectY / std::sqrt(std::pow(playerMouseVectX, 2) + std::pow(playerMouseVectY, 2))) * 100 + yPos;
 	}
 
 
