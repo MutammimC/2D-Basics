@@ -4,8 +4,12 @@
 class Player
 {
 private:
+	int playerWidth;
+	int playerHeight;
+
 	int xPos;
 	int yPos;
+
 
 	const int xMax = GetScreenWidth() - 10;
 	const int yMax = GetScreenHeight() - 10;
@@ -21,9 +25,17 @@ private:
 	int yPlayerDirection;
 
 public:
+
 	Player();
+
+	int getXPlayerCenter() const;
+	int getYPlayerCenter() const;
+
 	void checkScreenLimit();
+
 	void playerDirectionVector();
+
 	void Update();
+
 	void checkMovement();
 };
