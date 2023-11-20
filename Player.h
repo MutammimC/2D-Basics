@@ -23,6 +23,7 @@ private:
 public:
 	Player();
 	void checkScreenLimit();
-	void unitVectorXY();
+	void playerDirectionVector();
 	void Update();
+	void checkMovement();
 };

@@ -16,6 +16,7 @@ Player::Player()
 
 }
 
+
 void Player::checkScreenLimit()
 {
 	if (xPos >= xMax)
@@ -37,21 +38,23 @@ void Player::checkScreenLimit()
 	}
 }
 
-void Player::unitVectorXY()
+void Player::playerDirectionVector()
 {
-	//unit vector / normalized unit vector
-	xDirectionVector = (GetMouseX() - xPos) / (std::sqrt((GetMouseX() - xPos) ^ 2 + (GetMouseY() - yPos) ^ 2));
-	yDirectionVector = (GetMouseY() - yPos) / (std::sqrt((GetMouseX() - xPos) ^ 2 + (GetMouseY() - yPos) ^ 2));
-	
-	xPlayerDirection = xPos + xDirectionVector;
-	yPlayerDirection = yPos + yDirectionVector;
+	int playerMouseVectX = GetMouseX() - xPos;
+	int playerMouseVectY = GetMouseY() - yPos;
+	if (playerMouseVectX != 0 && playerMouseVectY != 0)
+	{
+		xDirectionVector = (playerMouseVectX / std::sqrt(std::pow(playerMouseVectX, 2) + std::pow(playerMouseVectY, 2)))*100 + xPos;
+		yDirectionVector = (playerMouseVectY / std::sqrt(std::pow(playerMouseVectX, 2) + std::pow(playerMouseVectY, 2)))*100 + yPos;
+	}
+
+
+
 }
 
-void Player::Update()
-{//for y 0 is the top left and down is max
- //for x 0 is also the top left and right is max
- //so think of y as inverted
 
+void Player::checkMovement()
+{
 	if (IsKeyDown(KEY_W))
 	{
 		yPos -= yPosUpdate;
@@ -68,10 +71,17 @@ void Player::Update()
 	{
 		xPos -= xPosUpdate;
 	}
+}
 
+
+void Player::Update()
+{//for y 0 is the top left and down is max
+ //for x 0 is also the top left and right is max
+ //so think of y as inverted
+	checkMovement();
 	checkScreenLimit();
-	unitVectorXY();
+	playerDirectionVector();
 
-	DrawLine(xPos, yPos, xPlayerDirection, yPlayerDirection, WHITE);
+	DrawLine(xPos, yPos, xDirectionVector, yDirectionVector, BLUE);
 	DrawRectangle(xPos, yPos, 10, 10, ORANGE);
 }
